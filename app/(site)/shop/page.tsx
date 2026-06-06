@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ShoppingBag, Filter, Search, Star } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
+import { getProductImage, getProductName } from "@/lib/productImages";
 import toast from "react-hot-toast";
 
 interface Product {
@@ -22,43 +23,7 @@ const fallback: Product[] = [
   { _id:"4", name:"Gloss + Liner Bundle", slug:"gloss-liner-bundle",   price:17, originalPrice:20, images:["/images/category-bundles.png"], description:"Buy lip gloss and liner — liner for only $5.", isFeatured:true, isBundle:true, stock:50, category:{name:"Gloss",slug:"gloss"} },
 ];
 
-const categoryImagesBySlug: Record<string, string> = {
-  "magic-lip-gloss": "/images/category-gloss.png",
-  "magic-lip-liner": "/images/category-liner.png",
-  "gloss-liner-bundle": "/images/category-bundles.png",
-};
-
-const productImagesBySlug: Record<string, string> = {
-  "labubu-keychain-gloss": "/images/featured-keychain.png",
-};
-
-const productNamesBySlug: Record<string, string> = {
-  "labubu-keychain-gloss": "Labubu Keychain Gloss",
-};
-
-const categoryImagesByCategorySlug: Record<string, string> = {
-  gloss: "/images/category-gloss.png",
-  liner: "/images/category-liner.png",
-  "keychain-gloss": "/images/category-keychain.png",
-  bundles: "/images/category-bundles.png",
-};
-
-function getProductName(p: Product): string {
-  return productNamesBySlug[p.slug] || p.name;
-}
-
-function getProductImage(p: Product): string {
-  if (p.isBundle) return categoryImagesBySlug["gloss-liner-bundle"];
-  return (
-    productImagesBySlug[p.slug] ||
-    categoryImagesBySlug[p.slug] ||
-    categoryImagesByCategorySlug[p.category?.slug] ||
-    p.images?.[0] ||
-    "/images/category-gloss.png"
-  );
-}
-
-const accentMap: Record<string,string> = { Gloss:"#4C1D95", Liner:"#0284C7", "Keychain Gloss":"#DB2777", Bundles:"#D97706" };
+const accentMap: Record<string, string> = { Gloss:"#4C1D95", Liner:"#0284C7", "Keychain Gloss":"#DB2777", Bundles:"#D97706" };
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -156,38 +121,40 @@ function ShopContent() {
               return (
                 <motion.div key={p._id} initial={{opacity:0,y:28}} animate={{opacity:1,y:0}} transition={{delay:i*0.07}}>
                   <div className="group card relative">
-                    <div className="relative h-52 overflow-hidden" style={{background:`linear-gradient(135deg,${accent}15,${accent}06)`}}>
-                      <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                      <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                        {p.isBundle&&<span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-400 text-white">Bundle</span>}
-                        {p.stock===0&&<span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-400 text-white">Sold Out</span>}
+                    <Link href={`/shop/${p.slug}`} className="block">
+                      <div className="relative h-52 overflow-hidden" style={{background:`linear-gradient(135deg,${accent}15,${accent}06)`}}>
+                        <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                          {p.isBundle&&<span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-400 text-white">Bundle</span>}
+                          {p.stock===0&&<span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-400 text-white">Sold Out</span>}
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-5">
-                      <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{color:accent}}>{p.category?.name}</p>
-                      <h3 className="text-gray-900 font-semibold text-sm mb-2">{name}</h3>
-                      <p className="text-gray-400 text-xs line-clamp-2 mb-3">{p.description}</p>
-                      <div className="flex items-center gap-0.5 mb-4">
-                        {[1,2,3,4,5].map(s=><Star key={s} className="w-3 h-3 text-amber-400 fill-amber-400" />)}
-                      </div>
-                      <div className="flex items-center justify-between">
+                      <div className="p-5 pb-3">
+                        <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{color:accent}}>{p.category?.name}</p>
+                        <h3 className="text-gray-900 font-semibold text-sm mb-2 group-hover:text-violet-800 transition-colors">{name}</h3>
+                        <p className="text-gray-400 text-xs line-clamp-2 mb-3">{p.description}</p>
+                        <div className="flex items-center gap-0.5 mb-3">
+                          {[1,2,3,4,5].map(s=><Star key={s} className="w-3 h-3 text-amber-400 fill-amber-400" />)}
+                        </div>
                         <div className="flex items-baseline gap-1">
                           <span className="text-lg font-bold text-gray-900">${p.price}</span>
                           <span className="text-[10px] text-gray-400">CAD</span>
-                          {p.originalPrice&&<span className="text-xs text-gray-300 line-through">${p.originalPrice}</span>}
-                        </div>
-                        <div className="flex gap-2">
-                          <button onClick={()=>handleAdd(p)} disabled={p.stock===0}
-                            className="p-2 rounded-xl transition-all disabled:opacity-40"
-                            style={{background:`${accent}15`,border:`1px solid ${accent}30`,color:accent}}>
-                            <ShoppingBag className="w-4 h-4" />
-                          </button>
-                          <Link href={`/shop/${p.slug}`} className="px-3 py-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-500 text-xs font-medium transition-all">
-                            View
-                          </Link>
+                          {p.originalPrice&&<span className="text-xs text-gray-300 line-through ml-1">${p.originalPrice}</span>}
                         </div>
                       </div>
+                    </Link>
+                    <div className="px-5 pb-5 flex items-center justify-end">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAdd(p); }}
+                        disabled={p.stock===0}
+                        className="p-2.5 rounded-xl transition-all disabled:opacity-40 hover:scale-105"
+                        style={{background:`${accent}15`,border:`1px solid ${accent}30`,color:accent}}
+                        aria-label={`Add ${name} to cart`}
+                      >
+                        <ShoppingBag className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
                 </motion.div>

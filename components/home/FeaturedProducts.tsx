@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ArrowRight } from "lucide-react";
 import ShowcaseCard from "@/components/ui/ShowcaseCard";
+import { getProductImage } from "@/lib/productImages";
 
 interface Product {
   _id: string;
@@ -26,13 +27,6 @@ const categoryFallbackBySlug: Record<string, string> = {
   "gloss-liner-bundle": "/images/category-bundles.png",
 };
 
-const featuredImagesBySlug: Record<string, string> = {
-  "magic-lip-gloss": "/images/featured-gloss.png",
-  "magic-lip-liner": "/images/featured-liner.png",
-  "labubu-keychain-gloss": "/images/featured-keychain.png",
-  "gloss-liner-bundle": "/images/featured-bundle.png",
-};
-
 const accentsBySlug: Record<string, string> = {
   "magic-lip-gloss": "#4C1D95",
   "magic-lip-liner": "#0284C7",
@@ -50,10 +44,6 @@ const longDescriptions: Record<string, string> = {
   "gloss-liner-bundle":
     "Buy lip gloss and liner together for the ultimate lip duo at a special bundle price. Everything you need for a bold, glossy, perfectly defined look.",
 };
-
-function getProductImage(product: Product): string {
-  return featuredImagesBySlug[product.slug] || product.images?.[0] || categoryFallbackBySlug[product.slug] || "/images/category-gloss.png";
-}
 
 function getAccent(product: Product): string {
   return accentsBySlug[product.slug] || "#4C1D95";

@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ShoppingBag, Star, ArrowLeft, Minus, Plus, Heart } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
+import { getProductImage, getProductName } from "@/lib/productImages";
 import toast from "react-hot-toast";
 
 interface Product {
@@ -22,28 +24,33 @@ interface Product {
   tags?: string[];
 }
 
-const emojiMap: Record<string, string> = { "Gloss": "💄", "Liner": "✏️", "Keychain Gloss": "🔑", "Accessories": "👜" };
-
 export default function ProductDetailPage() {
   const params = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
   const [wishlisted, setWishlisted] = useState(false);
+  const [imgSrc, setImgSrc] = useState("");
   const addItem = useCartStore((s) => s.addItem);
 
   useEffect(() => {
     if (!params.slug) return;
     fetch(`/api/products/${params.slug}`)
       .then((r) => r.json())
-      .then((d) => { setProduct(d.product); setLoading(false); })
+      .then((d) => {
+        setProduct(d.product);
+        if (d.product) setImgSrc(getProductImage(d.product));
+        setLoading(false);
+      })
       .catch(() => setLoading(false));
   }, [params.slug]);
 
   const handleAddToCart = () => {
     if (!product) return;
-    addItem({ id: product._id, name: product.name, price: product.price, quantity: qty, image: product.images[0] || "", slug: product.slug });
-    toast.success(`${product.name} × ${qty} added to cart! 💄`);
+    const image = getProductImage(product);
+    const name = getProductName(product);
+    addItem({ id: product._id, name, price: product.price, quantity: qty, image, slug: product.slug });
+    toast.success(`${name} × ${qty} added to cart! 💄`);
   };
 
   if (loading) return (
@@ -62,7 +69,8 @@ export default function ProductDetailPage() {
     </div>
   );
 
-  const emoji = emojiMap[product.category?.name] || "✨";
+  const displayName = getProductName(product);
+  const displayImage = imgSrc || getProductImage(product);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#07051A] to-[#0F0A2E] py-8 sm:py-12">
@@ -75,16 +83,18 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
-            <div className="aspect-square rounded-3xl overflow-hidden glass border border-purple-500/20 flex items-center justify-center relative">
-              {product.images?.[0] ? (
-                <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
-              ) : (
-                <motion.span animate={{ y: [0, -15, 0] }} transition={{ duration: 4, repeat: Infinity }} className="text-[80px] sm:text-[120px]">
-                  {emoji}
-                </motion.span>
-              )}
+            <div className="aspect-square rounded-3xl overflow-hidden glass border border-purple-500/20 relative bg-gradient-to-br from-purple-900/30 to-pink-900/20">
+              <Image
+                src={displayImage}
+                alt={displayName}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                onError={() => setImgSrc("/images/category-gloss.png")}
+              />
               {product.isBundle && (
-                <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 text-sm font-bold">
+                <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 text-sm font-bold z-10">
                   Bundle Deal ✨
                 </div>
               )}
@@ -98,10 +108,10 @@ export default function ProductDetailPage() {
                 {product.category?.name}
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
-                {product.name}
+                {displayName}
               </h1>
               <div className="flex items-center gap-2 mb-4">
-                {[1,2,3,4,5].map((s) => <Star key={s} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
+                {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}
                 <span className="text-white/50 text-sm ml-1">Popular</span>
               </div>
             </div>
