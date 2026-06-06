@@ -1,0 +1,8 @@
+Place product images here:
+- placeholder-gloss.jpg
+- placeholder-liner.jpg
+- placeholder-keychain.jpg
+- placeholder-bundle.jpg
+- gallery-1.jpg through gallery-4.jpg
+
+Place logo.png in /public/logo.png
