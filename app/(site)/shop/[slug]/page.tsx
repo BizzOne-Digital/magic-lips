@@ -127,9 +127,9 @@ export default function ProductDetailPage() {
             <p className="text-white/70 leading-relaxed">{product.description}</p>
 
             {product.isBundle && (
-              <div className="glass rounded-xl p-4 border border-yellow-500/30">
-                <p className="text-yellow-400 font-semibold text-sm mb-1">🎉 Bundle Deal!</p>
-                <p className="text-white/60 text-sm">Includes Lip Gloss ($12) + Lip Liner at special bundle price. Save $3!</p>
+              <div className="glass-dark rounded-xl p-4 border border-yellow-500/30">
+                <p className="text-yellow-300 font-semibold text-sm mb-1">🎉 Bundle Deal!</p>
+                <p className="text-white/80 text-sm">Includes Lip Gloss ($12) + Lip Liner at special bundle price. Save $3!</p>
               </div>
             )}
 
@@ -161,7 +161,7 @@ export default function ProductDetailPage() {
                 <ShoppingBag className="w-5 h-5" />
                 {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
               </button>
-              <button onClick={() => setWishlisted(!wishlisted)} className={`p-4 rounded-full glass border transition-all self-center sm:self-auto ${wishlisted ? "border-pink-500/50 bg-pink-500/20 text-pink-400" : "border-white/10 text-white/50 hover:border-pink-500/30 hover:text-pink-400"}`}>
+              <button onClick={() => setWishlisted(!wishlisted)} className={`p-4 rounded-full glass-dark border transition-all self-center sm:self-auto ${wishlisted ? "border-pink-500/50 bg-pink-500/20 text-pink-400" : "border-white/20 text-white/70 hover:border-pink-500/30 hover:text-pink-400"}`}>
                 <Heart className={`w-5 h-5 ${wishlisted ? "fill-pink-400" : ""}`} />
               </button>
             </div>
@@ -169,7 +169,7 @@ export default function ProductDetailPage() {
             {product.tags && product.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {product.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full glass border border-white/10 text-white/50 text-xs">
+                  <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/25 text-white text-xs">
                     #{tag}
                   </span>
                 ))}

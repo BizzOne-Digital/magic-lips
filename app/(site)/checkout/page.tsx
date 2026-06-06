@@ -119,12 +119,12 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment note */}
-            <div className="glass rounded-xl p-4 border border-yellow-500/20">
+            <div className="glass-dark rounded-xl p-4 border border-yellow-500/30">
               <div className="flex items-center gap-3">
-                <Package className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                <Package className="w-5 h-5 text-yellow-300 flex-shrink-0" />
                 <div>
-                  <p className="text-white/80 text-sm font-medium">Payment on Delivery</p>
-                  <p className="text-white/50 text-xs mt-0.5">Pay securely when your order arrives. We&apos;ll confirm your order by email.</p>
+                  <p className="text-white font-medium text-sm">Payment on Delivery</p>
+                  <p className="text-white/70 text-xs mt-0.5">Pay securely when your order arrives. We&apos;ll confirm your order by email.</p>
                 </div>
               </div>
             </div>

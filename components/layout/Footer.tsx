@@ -61,16 +61,13 @@ function InfoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="rounded-2xl p-5 sm:p-6 flex-1"
+      className="rounded-2xl p-5 sm:p-6 flex-1 text-white"
       style={{
         background: "rgba(255,255,255,0.05)",
         border: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      <p
-        className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4"
-        style={{ color: "rgba(196,181,253,0.7)" }}
-      >
+      <p className="text-[10px] font-bold uppercase tracking-[0.18em] mb-4 text-white/90">
         {label}
       </p>
       {children}
@@ -114,7 +111,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden"
+      className="relative overflow-hidden text-white"
       style={{ background: "linear-gradient(170deg, #12092b 0%, #0e0620 60%, #0a0418 100%)" }}
     >
       {/* ── Animated moving line at very top ── */}
@@ -142,7 +139,7 @@ export default function Footer() {
           style={{ borderColor: "rgba(255,255,255,0.06)" }}
         >
           <h2
-            className="text-xl sm:text-2xl md:text-3xl font-semibold text-white/80 px-2"
+            className="text-xl sm:text-2xl md:text-3xl font-semibold text-white px-2"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Your premier destination for premium lip beauty
@@ -165,7 +162,7 @@ export default function Footer() {
                 >
                   <Phone className="w-3.5 h-3.5 text-violet-300" />
                 </div>
-                <span className="text-white/65 text-sm group-hover:text-white/90 transition-colors">
+                <span className="text-white text-sm group-hover:text-white/80 transition-colors">
                   +1 647 495 0299
                 </span>
               </a>
@@ -179,7 +176,7 @@ export default function Footer() {
                 >
                   <Mail className="w-3.5 h-3.5 text-violet-300" />
                 </div>
-                <span className="text-white/65 text-sm group-hover:text-white/90 transition-colors break-all">
+                <span className="text-white text-sm group-hover:text-white/80 transition-colors break-all">
                   magiclips2013@gmail.com
                 </span>
               </a>
@@ -196,8 +193,8 @@ export default function Footer() {
                 <MapPin className="w-3.5 h-3.5 text-violet-300" />
               </div>
               <div>
-                <p className="text-white/85 font-semibold text-sm mb-1">York — Ontario</p>
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-white font-semibold text-sm mb-1">York — Ontario</p>
+                <p className="text-white/75 text-sm leading-relaxed">
                   3735 Dundas St W<br />
                   York, ON M6S 2T6<br />
                   Canada
@@ -208,7 +205,7 @@ export default function Footer() {
 
           {/* Newsletter card */}
           <InfoCard label="Get 10% Off" delay={0.2}>
-            <p className="text-white/45 text-xs mb-4 leading-relaxed">
+            <p className="text-white/80 text-xs mb-4 leading-relaxed">
               Subscribe to our beauty list and get an exclusive 10% discount code for your first order.
             </p>
             <form onSubmit={handleSubscribe} className="space-y-2">
@@ -299,7 +296,7 @@ export default function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-white/45 hover:text-white/85 text-sm transition-colors"
+              className="text-white/70 hover:text-white text-sm transition-colors"
             >
               {link.label}
             </Link>

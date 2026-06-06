@@ -74,7 +74,7 @@ export default function CartPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20, height: 0 }}
-                  className="glass rounded-2xl p-4 sm:p-5 border border-white/10"
+                  className="glass-dark rounded-2xl p-4 sm:p-5 border border-white/10"
                 >
                   <div className="flex items-start gap-3 sm:gap-4">
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-purple-900/60 to-pink-900/60 flex items-center justify-center flex-shrink-0">
@@ -96,7 +96,7 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
-                    <div className="flex items-center glass rounded-xl border border-white/10">
+                    <div className="flex items-center bg-white/5 rounded-xl border border-white/10">
                       <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="p-2.5 hover:bg-white/10 rounded-l-xl">
                         <Minus className="w-3 h-3 text-white" />
                       </button>
@@ -175,8 +175,10 @@ export default function CartPage() {
             </div>
 
             {subtotal < 30 && (
-              <div className="glass rounded-xl p-4 border border-yellow-500/20 text-center">
-                <p className="text-yellow-400 text-sm">Add ${(30 - subtotal).toFixed(2)} more for <strong>free shipping</strong>!</p>
+              <div className="glass-dark rounded-xl p-4 border border-amber-400/30 text-center">
+                <p className="text-white text-sm">
+                  Add ${(30 - subtotal).toFixed(2)} more for <strong className="text-amber-300">free shipping</strong>!
+                </p>
               </div>
             )}
           </div>
