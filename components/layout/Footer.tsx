@@ -109,11 +109,32 @@ export default function Footer() {
                 Subscribe & Save
               </button>
             </form>
-            <div className="flex gap-3 text-sm">
-              <a href="https://instagram.com/magiclips2013" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#9D8EC4] transition-colors duration-200">
+            <div className="flex gap-3">
+              <a
+                href="https://instagram.com/magiclips2013"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#6147A1] transition-colors duration-200"
+              >
+                {/* Instagram icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.74 2.014 2.081.673 3.422.09 5.264.005 7.119-.053 8.399-.067 8.808 0 12c0 3.192.014 3.601.072 4.881.085 1.855.668 3.697 2.009 5.038 1.341 1.341 3.183 1.924 5.038 2.009C8.399 23.986 8.808 24 12 24s3.601-.014 4.881-.072c1.855-.085 3.697-.668 5.038-2.009 1.341-1.341 1.924-3.183 2.009-5.038.058-1.28.072-1.689.072-4.881 0-3.192-.014-3.601-.072-4.881-.085-1.855-.668-3.697-2.009-5.038C20.578.74 18.736.157 16.881.072 15.601.014 15.192 0 12 0z"/>
+                  <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324A6.162 6.162 0 0 0 12 5.838zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
                 Instagram
               </a>
-              <a href="https://tiktok.com/@magiclips02" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#9D8EC4] transition-colors duration-200">
+              <a
+                href="https://tiktok.com/@magiclips02"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-[#6147A1] transition-colors duration-200"
+              >
+                {/* TikTok icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.74a4.85 4.85 0 0 1-1.01-.05z"/>
+                </svg>
                 TikTok
               </a>
             </div>
