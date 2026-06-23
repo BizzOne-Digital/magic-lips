@@ -56,8 +56,13 @@ const slides = [
 ];
 
 export default function HeroSlider() {
+  const [mounted, setMounted] = useState(false);
   const [cur, setCur] = useState(0);
   const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const go = useCallback((dir: 1 | -1) => {
     setFade(false);
@@ -161,6 +166,7 @@ export default function HeroSlider() {
         onClick={() => go(-1)}
         className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/15 border border-white/25 text-white hover:bg-white/25 backdrop-blur-sm transition-all duration-200"
         aria-label="Previous slide"
+        suppressHydrationWarning
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -169,6 +175,7 @@ export default function HeroSlider() {
         onClick={() => go(1)}
         className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/15 border border-white/25 text-white hover:bg-white/25 backdrop-blur-sm transition-all duration-200"
         aria-label="Next slide"
+        suppressHydrationWarning
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -181,9 +188,10 @@ export default function HeroSlider() {
             type="button"
             onClick={() => goTo(i)}
             className={`h-2 rounded-full transition-all duration-200 ${
-              i === cur ? "w-7 bg-[#6147A1]" : "w-2 bg-[#6147A1]/35 hover:bg-[#6147A1]/55"
+              mounted && i === cur ? "w-7 bg-[#6147A1]" : "w-2 bg-[#6147A1]/35 hover:bg-[#6147A1]/55"
             }`}
             aria-label={`Go to slide ${i + 1}`}
+            suppressHydrationWarning
           />
         ))}
       </div>

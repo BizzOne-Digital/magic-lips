@@ -104,8 +104,9 @@ export default function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2.5 rounded-lg text-sm border border-[#9D8EC4]/20 bg-white focus:outline-none focus:border-[#9D8EC4] transition-colors duration-200"
                 required
+                suppressHydrationWarning
               />
-              <button type="submit" className="w-full btn-primary text-sm py-2.5">
+              <button type="submit" className="w-full btn-primary text-sm py-2.5" suppressHydrationWarning>
                 Subscribe & Save
               </button>
             </form>

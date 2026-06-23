@@ -11,7 +11,7 @@ const features = [
 
 export default function AboutSection() {
   return (
-    <section className="py-16 sm:py-20 bg-white">
+    <section className="py-10 sm:py-14 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-square max-w-md mx-auto w-full rounded-2xl overflow-hidden bg-[#F0ECFB] border border-[#9D8EC4]/10">

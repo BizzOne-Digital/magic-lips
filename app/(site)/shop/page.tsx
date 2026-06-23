@@ -24,10 +24,10 @@ interface Product {
 interface Category { _id: string; name: string; slug: string; }
 
 const fallback: Product[] = [
-  { _id: "1", name: "Magic Lip Gloss", slug: "magic-lip-gloss", price: 12, images: ["/images/category-gloss.png"], description: "High-shine lip gloss for a bold glossy finish.", isFeatured: true, stock: 100, category: { name: "Gloss", slug: "gloss" } },
-  { _id: "2", name: "Magic Lip Liner", slug: "magic-lip-liner", price: 8, images: ["/images/category-liner.png"], description: "Smooth lip liner to shape and define lips.", isFeatured: true, stock: 100, category: { name: "Liner", slug: "liner" } },
-  { _id: "3", name: "Labubu Keychain Gloss", slug: "labubu-keychain-gloss", price: 15, images: ["/images/featured-keychain.png"], description: "Adorable keychain gloss — a playful beauty essential.", isFeatured: true, stock: 50, category: { name: "Keychain Gloss", slug: "keychain-gloss" } },
-  { _id: "4", name: "Gloss + Liner Bundle", slug: "gloss-liner-bundle", price: 17, originalPrice: 20, images: ["/images/category-bundles.png"], description: "Buy lip gloss and liner — liner for only $5.", isFeatured: true, isBundle: true, stock: 50, category: { name: "Gloss", slug: "gloss" } },
+  { _id: "1", name: "Magic Lip Gloss", slug: "magic-lip-gloss", price: 12, images: ["/images/category-gloss.png"], description: "High-shine lip gloss for a bold glossy finish.", isFeatured: true, stock: 100, category: { name: "Lip Gloss", slug: "gloss" } },
+  { _id: "2", name: "Magic Lip Liner", slug: "magic-lip-liner", price: 8, images: ["/images/category-liner.png"], description: "Smooth lip liner to shape and define lips.", isFeatured: true, stock: 100, category: { name: "Lip Liners", slug: "liner" } },
+  { _id: "3", name: "Labubu Keychain Gloss", slug: "labubu-keychain-gloss", price: 15, images: ["/images/featured-keychain.png"], description: "Adorable Labubu keychain gloss — a playful beauty essential.", isFeatured: true, stock: 50, category: { name: "Labubu Keychain Gloss", slug: "keychain-gloss" } },
+  { _id: "4", name: "Gloss + Liner Bundle", slug: "gloss-liner-bundle", price: 17, originalPrice: 20, images: ["/images/category-bundles.png"], description: "Buy lip gloss and liner — liner for only $5.", isFeatured: true, isBundle: true, stock: 50, category: { name: "Lip Gloss", slug: "gloss" } },
 ];
 
 function ShopContent() {
@@ -56,8 +56,8 @@ function ShopContent() {
     .filter((p) => {
       const matchCat =
         activeCategory === "all" ||
-        (activeCategory === "bundles" && p.isBundle) ||
-        p.category?.slug === activeCategory;
+        p.category?.slug === activeCategory ||
+        (activeCategory === "bundles" && p.isBundle);
       const matchSearch = !search || p.name.toLowerCase().includes(search.toLowerCase());
       return matchCat && matchSearch;
     })
@@ -106,9 +106,9 @@ function ShopContent() {
 
         <div className="flex items-center gap-2 flex-wrap mb-8">
           <Filter className="w-4 h-4 text-gray-400 flex-shrink-0" />
-          {["all", ...categories.map((c) => c.slug).filter((s) => s !== "accessories"), "bundles"].map((slug) => {
+          {["all", ...categories.map((c) => c.slug)].map((slug) => {
             const cat = categories.find((c) => c.slug === slug);
-            const label = slug === "all" ? "All" : slug === "bundles" ? "Bundles" : cat?.name || slug;
+            const label = slug === "all" ? "All" : cat?.name || slug;
             const active = activeCategory === slug;
             return (
               <button

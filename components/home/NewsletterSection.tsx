@@ -37,7 +37,7 @@ export default function NewsletterSection() {
   return (
     <section
       id="newsletter"
-      className="relative z-10 py-16 sm:py-20 bg-gradient-to-b from-white via-[#F0ECFB]/50 to-[#FCE7F3]/40"
+      className="relative z-10 py-10 sm:py-14 bg-gradient-to-b from-white via-[#F0ECFB]/50 to-[#FCE7F3]/40"
     >
       <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center animate-fade-in">
         <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 bg-white/80 text-[#9D8EC4] border border-[#9D8EC4]/20">
@@ -61,9 +61,10 @@ export default function NewsletterSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 rounded-lg bg-white border border-[#9D8EC4]/20 text-gray-700 placeholder-gray-400 text-sm focus:outline-none focus:border-[#9D8EC4] transition-colors duration-200"
                 required
+                suppressHydrationWarning
               />
             </div>
-            <button type="submit" disabled={loading} className="btn-primary px-6 py-3 text-sm whitespace-nowrap disabled:opacity-60">
+            <button type="submit" disabled={loading} className="btn-primary px-6 py-3 text-sm whitespace-nowrap disabled:opacity-60" suppressHydrationWarning>
               {loading ? "Joining..." : "Subscribe & Save"}
             </button>
           </form>

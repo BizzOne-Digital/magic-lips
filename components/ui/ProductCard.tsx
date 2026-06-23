@@ -1,7 +1,7 @@
 ﻿"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCart, Eye } from "lucide-react";
 
 interface ProductCardProps {
   slug: string;
@@ -57,17 +57,18 @@ export default function ProductCard({
               type="button"
               onClick={onAddToCart}
               disabled={stock === 0}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-[#9D8EC4] hover:bg-[#9D8EC4] transition-all duration-200 disabled:opacity-50"
+              title="Add to Cart"
+              className="flex-1 inline-flex items-center justify-center p-2.5 rounded-lg text-white bg-[#6147A1] hover:bg-[#4f3a87] transition-all duration-200 disabled:opacity-50"
             >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              Add to Cart
+              <ShoppingCart className="w-5 h-5" />
             </button>
           )}
           <Link
             href={`/shop/${slug}`}
-            className="flex-1 inline-flex items-center justify-center px-3 py-2.5 rounded-lg text-xs sm:text-sm font-semibold text-[#9D8EC4] border border-[#9D8EC4]/30 hover:bg-[#F0ECFB] transition-all duration-200 text-center"
+            title="View Details"
+            className="flex-1 inline-flex items-center justify-center p-2.5 rounded-lg text-[#6147A1] border border-[#6147A1]/40 hover:bg-[#6147A1]/10 transition-all duration-200"
           >
-            View Details
+            <Eye className="w-5 h-5" />
           </Link>
         </div>
       </div>

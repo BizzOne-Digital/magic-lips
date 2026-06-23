@@ -32,8 +32,11 @@ export default function ContactSection() {
   const inputCls =
     "w-full px-4 py-3 rounded-lg bg-white border border-[#9D8EC4]/20 text-gray-700 placeholder-gray-400 text-sm focus:outline-none focus:border-[#9D8EC4] transition-colors duration-200";
 
+  // shared prop to silence browser-extension hydration warnings
+  const noHydWarn = { suppressHydrationWarning: true } as const;
+
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-[#F0ECFB]/40">
+    <section id="contact" className="py-10 sm:py-14 bg-[#F0ECFB]/40">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
@@ -75,22 +78,22 @@ export default function ContactSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-gray-500 text-xs uppercase tracking-wider block mb-1.5">Name *</label>
-                <input type="text" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} required />
+                <input type="text" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputCls} required {...noHydWarn} />
               </div>
               <div>
                 <label className="text-gray-500 text-xs uppercase tracking-wider block mb-1.5">Phone</label>
-                <input type="tel" placeholder="Your phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputCls} />
+                <input type="tel" placeholder="Your phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputCls} {...noHydWarn} />
               </div>
             </div>
             <div>
               <label className="text-gray-500 text-xs uppercase tracking-wider block mb-1.5">Email *</label>
-              <input type="email" placeholder="your@email.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} required />
+              <input type="email" placeholder="your@email.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputCls} required {...noHydWarn} />
             </div>
             <div>
               <label className="text-gray-500 text-xs uppercase tracking-wider block mb-1.5">Message *</label>
-              <textarea placeholder="How can we help?" value={form.message} rows={4} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputCls} resize-none`} required />
+              <textarea placeholder="How can we help?" value={form.message} rows={4} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputCls} resize-none`} required {...noHydWarn} />
             </div>
-            <button type="submit" disabled={loading} className="w-full btn-primary py-3 gap-2 disabled:opacity-60">
+            <button type="submit" disabled={loading} className="w-full btn-primary py-3 gap-2 disabled:opacity-60" suppressHydrationWarning>
               {loading ? "Sending..." : <><Send className="w-4 h-4" /> Send Message</>}
             </button>
           </form>

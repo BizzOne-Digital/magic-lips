@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import SiteEffects from "@/components/ui/SiteEffects";
 import HeroSlider from "@/components/home/HeroSlider";
 import NewsletterSection from "@/components/home/NewsletterSection";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
+import FounderSection from "@/components/home/FounderSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import OffersSection from "@/components/home/OffersSection";
 import GalleryPreview from "@/components/home/GalleryPreview";
@@ -18,7 +18,7 @@ export default function HomePage() {
         <main>
           <HeroSlider />
           <NewsletterSection />
-          <FeaturedProducts />
+          <FounderSection />
           <CategoriesSection />
           <OffersSection />
           <GalleryPreview />

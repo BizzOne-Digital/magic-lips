@@ -18,7 +18,7 @@ export default function GalleryPreview() {
   }, []);
 
   return (
-    <section className="py-16 sm:py-20 bg-[#DBEAFE]/20">
+    <section className="py-10 sm:py-14 bg-[#DBEAFE]/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
